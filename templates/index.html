@@ -15,7 +15,7 @@
                 {% else %}
                 <h2 style="text-align: center">Empresa Selecionada:  {{ myvariable }}</h2>
                 {% endif %}
-                <select class="teamForm" id="teamDropdownSelector" type="text" name="teamDropdown" placeholder="Selecone a Empresa">
+                <select class="teamForm" id="teamDropdownSelector" type="text" name="teamDropdown" placeholder="Selecione a Empresa">
                     <option disabled selected>Empresa</option>
                      {% for empresa in empresa %}
                     <option value= "{{empresa}}">{{ empresa }}</option>"
