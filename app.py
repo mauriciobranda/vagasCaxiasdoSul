@@ -20,22 +20,45 @@ class Todo(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    #if request.method == 'POST':
     
-    mlista = mainList.consultaVagas(2) # EMPRESA QUE VAI SER LISTADA 
+    myvariable = request.form.get("teamDropdown")
 
-    your_list_as_json = json.dumps(mlista,indent=1, sort_keys=True, ensure_ascii=False) 
+    if myvariable == 'randon':
+        companycode = 1
+        print('passou randon')
+    elif myvariable == 'soprano':
+        companycode = 2
+    elif myvariable == 'totvs':
+        companycode = 3
+    elif myvariable == 'promob':
+        companycode = 4
+    else:
+        companycode = 0
+    
+    if companycode >0:
+        print('entrou')
+        print(companycode)
+        mlista = mainList.consultaVagas(companycode) # EMPRESA QUE VAI SER LISTADA 
+        your_list_as_json = json.dumps(mlista,indent=1, sort_keys=True, ensure_ascii=False) 
 
-    y = json.loads(your_list_as_json)
+        y = json.loads(your_list_as_json)
+        empresa = ['randon', 'soprano', 'totvs', 'promob']
         
-    empresa = ['Randon', 'Soprano', 'Totvs', 'Ambev']
-
-
-    return render_template('index.html', tasks=y, empresa=empresa)
+        return render_template('index.html', tasks=y,empresa=empresa, myvariable=myvariable)
+    else:
+        empresa = ['randon', 'soprano', 'totvs', 'promob']
+        return render_template('index.html', empresa=empresa, myvariable=myvariable)
     #else:
     #    tasks = Todo.query.order_by(Todo.date_created).all()
     #    print('refresh')
     #    return render_template('index.html', tasks=tasks)
+
+
+#@app.route("/submitted", methods=['POST'])
+#def hello():
+#   myvariable = request.form.get("teamDropdown")
+#   print('passou aquiiiiiiiiiii')
+#   return myvariable
 
 
 @app.route('/delete/<int:id>')

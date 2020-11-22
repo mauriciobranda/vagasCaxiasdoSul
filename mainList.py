@@ -15,8 +15,14 @@ def consultaVagas(companycode):
 
     if companycode == 1:
         companyName = 'randon'
+    elif companycode == 2:
+        companyName = 'soprano'
+    elif companycode == 3:
+        companyName = 'totvs'
+    elif companycode == 4:
+        companyName = 'promob'
     else:
-            companyName = 'soprano'
+        print ("4 - Got a false expression value")
 
     url = 'https://'+companyName+'.gupy.io/'
 
